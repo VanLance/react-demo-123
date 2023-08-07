@@ -1,35 +1,27 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Header from './component/Header';
-import DisplayClass from './component/DisplayClass';
+import MatrixClassroomPage from './pages/MatrixClassroomPage';
+import LoginPage from './pages/LoginPage';
+import UserPage from './pages/UserPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
-  
-  const matrixStudents: Array<string> = [
-    'christian',
-    'ben',
-    'sima',
-    'david',
-    'michael',
-  ];
   // const matrixStudents: Array<string> = [];
 
-  const [whiteboardStudent, setWhiteboardStudent] = useState('sima');
-
   return (
-    <Container fluid className="container">
-      <Header />
-      <DisplayClass students={matrixStudents} />
-      <p>Today's whiteboard was perfomed by {whiteboardStudent}</p>
-      <button
-        onClick={() => {
-          setWhiteboardStudent(
-            matrixStudents[Math.floor(Math.random() * matrixStudents.length)]
-          );
-        }}
-      >
-        Update Whiteboard Student
-      </button>
+    <Container fluid className="app">
+        <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path='/' element={<MatrixClassroomPage />} />
+          <Route path='/user-page' element={<UserPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='*' element={<Navigate to='/' />} />
+        </Routes>
+      </BrowserRouter>
     </Container>
   );
 }
