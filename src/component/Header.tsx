@@ -8,8 +8,6 @@ import { useContext } from 'react';
 export default function Header() {
   const { user } = useContext(UserContext);
 
-  console.log(user, 'from header');
-
   return (
     <Navbar data-bs-theme="dark" sticky="top" className="header">
       <Container>

@@ -1,38 +1,43 @@
-import Body from '../component/Body';
+import { useContext, useEffect, useState } from 'react';
+import Post from '../component/Post';
+import { UserContext } from '../contexts/UserProvider';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
-export default function Posts() {
-  const posts: Postable[] = [
-    {
-      body: 'Insomnia Post 2',
-      timestamp: 'Tue, 08 Aug 2023 14:30:12 GMT',
-    },
-    {
-      body: 'Matrix in React',
-      timestamp: 'Tue, 08 Aug 2023 14:30:25 GMT',
-    },
-    {
-      body: 'React is a Powerful library',
-      timestamp: 'Tue, 08 Aug 2023 14:30:44 GMT',
-    },
-    {
-      body: 'How dare you call React a framework, Where is the router',
-      timestamp: 'Tue, 08 Aug 2023 14:31:06 GMT',
-    },
-  ];
-  // useEffect(()=>{},[posts])
+const baseApiUrl = import.meta.env.VITE_APP_BASE_API;
+
+export default function Posts({username}: {username: string}) {
+  const [posts, setPosts] = useState<Array<Postable>>([]);
+  const { user } = useContext(UserContext);
+  console.log(user)
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`${baseApiUrl}/user-posts/${username}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        setPosts(data.posts);
+      } else window.alert('Failed Call')
+    })();
+  }, []);
 
   return (
-    <Body sidebar={true}>
+    <>
       <h2>Posts</h2>
       <>
-        {posts.map((post: Postable,i:number) => {
-          return (
-            <p key={i}>
-              {post.body} {post.timestamp.toLocaleString()}
-            </p>
-          );
-        })}
+        {posts.length !== 0 ?
+          posts.map((post: Postable, i: number) => {
+            return <Post post={post} key={i} />;
+          }):
+          <Spinner animation="border" variant="info" />
+        }
       </>
-    </Body>
+    </>
   );
 }

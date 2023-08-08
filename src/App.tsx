@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Header from './component/Header';
 import MatrixClassroomPage from './pages/MatrixClassroomPage';
 import UserPage from './pages/UserPage';
-import Posts from './pages/Posts';
+// import Posts from './pages/Posts';
 import FormPage from './pages/FormPage';
 import LoginForm from './component/LoginForm';
 import RegisterForm from './component/RegisterForm';
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MatrixClassroomPage />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/user-page" element={<UserPage />} />
+          <Route path="/user-page/:username" element={<UserPage />} />
           <Route
             path="/login"
             element={
@@ -29,7 +29,7 @@ function App() {
               </FormPage>
             }
           />
-          <Route path="/posts" element={<Posts />} />
+          {/* <Route path="/posts" element={<Posts />} /> */}
           <Route
             path="/register"
             element={
