@@ -8,6 +8,7 @@ import Posts from './pages/Posts';
 import FormPage from './pages/FormPage';
 import LoginForm from './component/LoginForm';
 import RegisterForm from './component/RegisterForm';
+import Logout from './component/Logout';
 
 function App() {
   // const matrixStudents: Array<string> = [];
@@ -18,6 +19,7 @@ function App() {
       <Header />
         <Routes>
           <Route path="/" element={<MatrixClassroomPage />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/user-page" element={<UserPage />} />
           <Route
             path="/login"

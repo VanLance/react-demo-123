@@ -19,9 +19,6 @@ export default function Posts() {
       timestamp: 'Tue, 08 Aug 2023 14:31:06 GMT',
     },
   ];
-  console.log(posts);
-  console.log(posts.length);
-
   // useEffect(()=>{},[posts])
 
   return (
