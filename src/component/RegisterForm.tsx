@@ -1,5 +1,6 @@
-import { useRef, FormEvent, useState, useEffect } from 'react';
+import { useRef, FormEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../contexts/UserProvider';
 
 export default function RegisterPage() {
   const usernameField = useRef<HTMLInputElement>(null);
@@ -10,9 +11,8 @@ export default function RegisterPage() {
   const lastNameField = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate()
-
-  const [user, setUser] = useState<LoggedUser>({ username: '', token: '' });
-  console.log(user);
+  const {user, setUser} = useContext(UserContext)
+  
 
   useEffect(() => {
     if (user.username) navigate('/');
@@ -58,26 +58,26 @@ export default function RegisterPage() {
 
   return (
     <>
-      <h2></h2>
+      <h2>Register</h2>
       <form onSubmit={handleRegisterData}>
-        <label>Username
+        <label>Username<br />
           <input type="text" ref={usernameField} required/>
-        </label>
-        <label>Email
+        </label><br />
+        <label>Email<br />
           <input type="text" ref={emailField}/>
-        </label>
-        <label>Password
+        </label><br />
+        <label>Password<br />
           <input type="password" ref={passwordField} required/>
-        </label>
-        <label>Verify Password
+        </label><br />
+        <label>Verify Password<br />
           <input type="password" ref={verifyPasswordField} required/>
-        </label>
-        <label>First Name
+        </label><br />
+        <label>First Name<br />
           <input type="text" ref={firstNameField}/>
-        </label>
-        <label>Last Name
+        </label><br />
+        <label>Last Name<br />
           <input type="text" ref={lastNameField}/>
-        </label>
+        </label><br />
           <button>Register</button>
       </form>
     </>

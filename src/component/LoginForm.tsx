@@ -1,14 +1,15 @@
-import { useRef, FormEvent, useState, useEffect } from 'react';
+import { useRef, FormEvent, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../contexts/UserProvider'
 
 export default function LoginForm() {
   const usernameField = useRef<HTMLInputElement>(null);
   const passwordField = useRef<HTMLInputElement>(null);
   const navigate = useNavigate()
+  const { user, setUser } = useContext(UserContext)
 
-  const [user, setUser] = useState<LoggedUser>({username:'', token:''})
   console.log(user)
-
+  
   useEffect(()=>{
     if (user.username) navigate('/')
   },[user])
