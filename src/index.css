@@ -3,6 +3,10 @@ body {
   color: white;
 }
 
+.content{
+  top:100px;
+}
+
 .app{
   padding:0;
 }

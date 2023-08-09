@@ -14,27 +14,33 @@ export default function Header() {
         <Navbar.Brand as={NavLink} to="/">
           Matrix Fakebook
         </Navbar.Brand>
+        {user.username ? (
+          <>
+            <form>
+              <input type="text" placeholder="search" />
+              <button>Search</button>
+            </form>
+            <Nav.Item className="align-self-end">
+              <Nav.Link as={NavLink} to="/logout">
+                Logout
+              </Nav.Link>
+            </Nav.Item>
+          </>
+        ) : (
+          <>
+            <Nav.Item className="align-self-end">
+              <Nav.Link as={NavLink} to="/login">
+                Login
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="align-self-end">
+              <Nav.Link as={NavLink} to="/register">
+                Register
+              </Nav.Link>
+            </Nav.Item>
+          </>
+        )}
       </Container>
-      { user.username ? (
-        <Nav.Item >
-          <Nav.Link as={NavLink} to="/logout" className = 'mr-3'>
-            Logout
-          </Nav.Link>
-        </Nav.Item>
-      ) : (
-        <>
-          <Nav.Item>
-            <Nav.Link as={NavLink} to="/login">
-              Login
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={NavLink} to="/register">
-              Register
-            </Nav.Link>
-          </Nav.Item>
-        </>
-      )}
     </Navbar>
   );
 }
